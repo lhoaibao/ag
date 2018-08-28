@@ -2,29 +2,32 @@ import sys
 import os
 
 
-def makeLine(nd, argv, mode):
+def makeLine(t, argv, mode):
     if mode == 0:
-        if argv in nd:
+        if argv in t:
             nd = nd.replace(argv, '\033[30;43m' + argv + '\033[0m')
     if mode == 1:
-        if argv.lower() in nd.lower():
-            for i in range(len(nd)):
+        check = []
+        if argv.lower() in t.lower():
+            for i in range(len(t)):
                 a = i
                 j = 0
                 w = ''
-                while argv[j].lower() == nd[a].lower():
+                while argv[j].lower() == t[a].lower():
                     if j != len(argv) - 1:
-                        w += nd[a]
+                        w += t[a]
                         a += 1
                         j += 1
                     else:
-                        if argv[j].lower() == nd[a].lower():
-                            w += nd[a]
-                            nd = nd.replace(w, '\033[30;43m' + w + '\033[0m')
+                        if argv[j].lower() == t[a].lower():
+                            w += t[a]
+                            if w not in check:
+                                check.append(w)
+                                t = t.replace(w, '\033[30;43m' + w + '\033[0m')
                             break
                         else:
                             break
-    return nd
+    return t
 
 
 def caseSensitive(item):
