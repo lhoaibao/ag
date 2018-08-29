@@ -28,7 +28,7 @@ def caseSensitive(item):
             changeFile(sys.argv[2], sys.argv[1], 1)
 
 
-def changeFile(file,item,mode):
+def changeFile(file, item, mode):
         file = open(file, "r")
         content = file.read()
         content = content.split('\n')
